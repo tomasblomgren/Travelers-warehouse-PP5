@@ -1,0 +1,8 @@
+html {
+    height: 100%;
+}
+
+body {
+    background: url('/media/favicon_sun_and_moon.jpg') no repeat center center-fixed;
+    background-size: cover;
+}
