@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url('/media/favicon_sun_and_moon.jpg') no repeat center center-fixed;
+    background: url('/media/sun_and_moon.jpg') no repeat center center-fixed;
     background-size: cover;
     height: calc(100vh - 164px);
     color: #555;
@@ -56,7 +56,7 @@ body {
     border: 1px solid black !important;
 }
 
-/* -------------------------------- Media Queries */
+/*  Media Queries */
 
 /* Slightly larger container on xl screens */
 @media (min-width: 1200px) {
