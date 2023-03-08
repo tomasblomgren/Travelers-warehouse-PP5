@@ -19,10 +19,11 @@
                 Clothing
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="clothing-link">
-                <a href="" class="dropdown-item">Outdoors</a>
-                <a href="" class="dropdown-item">Sunshine</a>
-                <a href="" class="dropdown-item">Cold Weather</a>
-                <a href="" class="dropdown-item">All Products</a>
+                <a href="{% url 'products' %}?categories=outdoors" class="dropdown-item">Outdoors</a>
+                <a href="{% url 'products' %}?categories=warm weather" class="dropdown-item">Warm Weather</a>
+                <a href="{% url 'products' %}?categories=cold weather" class="dropdown-item">Cold Weather</a>
+                <a href="{% url 'products' %}?categories=outdoors, warm weather, cold weather" class="dropdown-item">All
+                    Products</a>
             </div>
         </li>
 
