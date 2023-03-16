@@ -1,3 +1,4 @@
+<!-- this is the search bar in the nav menu -->
 <li class="list-inline-item">
     <a class="text-black nav-link d-block d-lg-none" href="#" id="mobile-search" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
@@ -22,6 +23,8 @@
         </form>
     </div>
 </li>
+
+<!-- this is the account dropdown menu in the nav menu -->
 <li class="list-inline-item dropdown">
     <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options" data-toggle="dropdown"
         aria-haspopup="true" aria-expanded="false">
@@ -44,6 +47,7 @@
         {% endif %}
     </div>
 </li>
+<!-- this is the shopping bag button in nave menu -->
 <li class="list-inline-item">
     <a class="{% if grand_total %}text-primary font-weight-bold{% else %}text-black{% endif %} nav-link d-block d-lg-none"
         href="">
@@ -56,6 +60,17 @@
                 $0.00
                 {% endif %}
             </p>
+        </div>
+    </a>
+</li>
+
+<!-- This is the favourites button in the nav menu -->
+<li class="list-inline-item">
+    <a class="text-black nav-link d-block d-lg-none" href="#" id="user-options data-toggle=" dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        <div class="text-center">
+            <div><i class="fas fa-heart fa-lg"></i></div>
+            <p class="my-0">Favourites</p>
         </div>
     </a>
 </li>
