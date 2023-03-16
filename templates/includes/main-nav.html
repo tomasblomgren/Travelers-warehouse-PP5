@@ -33,9 +33,9 @@
                 Footwear
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="homeware-link">
-                <a href="" class="dropdown-item">Shoes</a>
-                <a href="" class="dropdown-item">Socks</a>
-                <a href="" class="dropdown-item">All Footwear</a>
+                <a href="{% url 'products' %}?categories=Shoes" class="dropdown-item">Shoes</a>
+                <a href="{% url 'products' %}?categories=Socks" class="dropdown-item">Socks</a>
+                <a href="{% url 'products' %}?categories=Shoes,Socks" class="dropdown-item">All Footwear</a>
             </div>
         </li>
 
@@ -45,10 +45,11 @@
                 Accessories
             </a>
             <div class="dropdown-menu border-0" aria-labelledby="specials-link">
-                <a href="" class="dropdown-item">New Arrivals</a>
-                <a href="" class="dropdown-item">Deals</a>
-                <a href="" class="dropdown-item">Clearance</a>
-                <a href="" class="dropdown-item">All Specials</a>
+                <a href="{% url 'products' %}?categories=new_arrivals" class="dropdown-item">New Arrivals</a>
+                <a href="{% url 'products' %}?categories=Deals" class="dropdown-item">Deals</a>
+                <a href="{% url 'products' %}?categories=Clearance" class="dropdown-item">Clearance</a>
+                <a href="{% url 'products' %}?categories=new_arrivals,Deals,Clearance" class="dropdown-item">All
+                    Specials</a>
             </div>
         </li>
     </ul>

@@ -11,13 +11,13 @@ def all_products(request):
 
     products = Product.objects.all()
     query = None
-    category = None
+    categories = None
 
     if request.GET:
         if 'category' in request.GET:
             categories = request.GET['category'].split(',')
             products = products.filter(category__name__in=categories)
-            categories = category.objects.filter(name__in=categories)
+            categories = Category.objects.filter(name__in=categories)
 
         if 'q' in request.GET:
 
@@ -32,7 +32,7 @@ def all_products(request):
     context = {
         'products': products,
         'search_term': query,
-        'current-categories': categories,
+        'current_categories': categories,
     }
 
     return render(request, 'products/products.html', context)
@@ -51,7 +51,7 @@ def product_detail(request, product_id):
 
 
 def favourites(request, product_id):
-    """ A view to show the favourites to the user """
+    """ view to show the favourites to the user """
 
     favourites = get_object_or_404(Product, pk=product_id)
 
@@ -63,9 +63,9 @@ def favourites(request, product_id):
 
 
 def extra_sales(request, product_id):
-    """ A view to show the suggested/assotiated products based on your items in the bag """
+    """ view to show the assotiated products based on your items in the bag """
 
-    extra_sales = (request, product_id, context)
+    extra_sales = (request, product_id, Product)
 
     context = {
         'extra_sales': extra_sales,

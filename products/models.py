@@ -33,3 +33,8 @@ class Product(models.Model):
 class Favourites(models.ManyToManyField):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     favourites = models.ManyToManyField(User, related_name='favourites', default=None, blank=True)
+
+
+class extra_sales(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    extra_sales = models.OneToOneField(User, related_name='extrasales', default=None, blank=True, on_delete=models.CASCADE)
