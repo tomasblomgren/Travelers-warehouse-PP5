@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Favourites</h1>
+{% if favourites %}
+<ul>
+    {% for favourite in favourites %}
+    <li>
+        <a href="{% url 'product_detail' favourite.product.pk %}">{{ favourite.product.name }}</a>
+        <form action="{% url 'remove_from_favourites' favourite.product.pk %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Remove from favourites</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>You have no favourites yet.</p>
+{% endif %}
+{% endblock %}

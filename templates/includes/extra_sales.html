@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Extra Sales</h1>
+<h2>Top Products</h2>
+<ul>
+    {% for product in top_products %}
+    <li>{{ product.name }} - {{ product.total_sales }}</li>
+    {% endfor %}
+</ul>
+<h2>Total Sales</h2>
+<p>{{ total_sales }} products sold</p>
+{% endblock %}

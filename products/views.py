@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.contrib import messages
-from django.db.models import Q
-from .models import Product, Category
+from django.db.models import Q, Sum
+from django.contrib.auth.decorators import login_required
+from .models import Product, Category, Favourite, Order
 
 # Create your views here.
 
@@ -11,7 +12,7 @@ def all_products(request):
 
     products = Product.objects.all()
     query = None
-    categories = None
+    category = None
 
     if request.GET:
         if 'category' in request.GET:
@@ -50,25 +51,33 @@ def product_detail(request, product_id):
     return render(request, 'products/product_detail.html', context)
 
 
-def favourites(request, product_id):
-    """ view to show the favourites to the user """
+@login_required
+def add_to_favourites(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    favourite, created = Favourite.objects.get_or_create(user=request.user, product=product)
+    if created:
+        message = "Added to favourites"
+    else:
+        message = "Already in favourites"
+    return redirect('product_detail', pk=product.pk, message=message)
 
-    favourites = get_object_or_404(Product, pk=product_id)
 
-    context = {
-        'favourites': favourites,
-    }
+@login_required
+def remove_from_favourites(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    favourite = get_object_or_404(Favourite, user=request.user, product=product)
+    favourite.delete()
+    message = "Removed from favourites"
+    return redirect('product_detail', pk=product.pk, message=message)
 
-    return render(request, 'templates/includes/favourites.html', context)
+
+@login_required
+def favourites_list(request):
+    favourites = Favourite.objects.filter(user=request.user)
+    return render(request, 'favourites.html', {'favourites': favourites})
 
 
-def extra_sales(request, product_id):
-    """ view to show the assotiated products based on your items in the bag """
-
-    extra_sales = (request, product_id, Product)
-
-    context = {
-        'extra_sales': extra_sales,
-    }
-
-    return render(request, 'templates/includes/extra_sales.html', context)
+def extra_sales(request):
+    top_products = Product.objects.annotate(total_sales=Sum('order__quantity')).order_by('-total_sales')[:10]
+    total_sales = Order.objects.filter(status__in=['C', 'S', 'D']).aggregate(total_sales=Sum('quantity'))['total_sales'] or 0
+    return render(request, 'extra_sales.html', {'top_products': top_products, 'total_sales': total_sales})

@@ -30,11 +30,29 @@ class Product(models.Model):
         return self.name
 
 
-class Favourites(models.ManyToManyField):
+class Favourite(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    favourites = models.ManyToManyField(User, related_name='favourites', default=None, blank=True)
+    product = models.ForeignKey('Product', on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('user', 'product')
 
 
-class extra_sales(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    extra_sales = models.OneToOneField(User, related_name='extrasales', default=None, blank=True, on_delete=models.CASCADE)
+class Order(models.Model):
+    STATUS_CHOICES = (
+        ('P', 'Pending'),
+        ('C', 'Confirmed'),
+        ('S', 'Shipped'),
+        ('D', 'Delivered'),
+    )
+
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+    status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='P')
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f'{self.quantity} x {self.product.name}'
+
+    def get_total_price(self):
+        return self.quantity * self.product.price
