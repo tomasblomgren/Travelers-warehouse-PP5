@@ -4,8 +4,6 @@ from django.db.models import Q, Sum
 from django.contrib.auth.decorators import login_required
 from .models import Product, Category, Favourite, Order
 
-# Create your views here.
-
 
 def all_products(request):
     """ A view to show all products including sorting and search queries """
