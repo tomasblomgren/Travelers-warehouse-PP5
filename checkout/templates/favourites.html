@@ -12,6 +12,14 @@
     <h2>Favorites</h2>
     <ul id="favorites-list"></ul>
 </div>
+<!-- Creates a form for checked favourite product -->
+<form id="my_form" method="post" action="get">
+    {% csrf_token %}
+    <input type="checkbox" name="selected_items" value="item1"> Item 1<br>
+    <input type="checkbox" name="selected_items" value="item2"> Item 2<br>
+    <input type="checkbox" name="selected_items" value="item3"> Item 3<br>
+    <button type="submit">Submit</button>
+</form>
 {% if favourites %}
 <ul>
     {% for favourite in favourites %}
@@ -60,6 +68,8 @@
                             class=" check-mb-5 fas fa-heart ml-5 mr-1" placeholder="Favourite here!">
                     </td>
 
+                    <button id="add-to-fav-btn">Favourite this Product!</button>
+                    <div id="fav-items"></div>
                     <!-- displays product rating and price -->
 
                     <div class="card-footer bg-white pt-0 border-0 text-left">
@@ -108,15 +118,7 @@
     </div>
 </div>
 
-<!-- Creates a form for checked favourite product -->
-<form id="my_form" method="post" action="">
-    {% csrf_token %}
-    <input type="checkbox" name="selected_items" value="item1"> Item 1<br>
-    <input type="checkbox" name="selected_items" value="item2"> Item 2<br>
-    <input type="checkbox" name="selected_items" value="item3"> Item 3<br>
-    <button type="submit">Submit</button>
-</form>
-
+<!-- JS for adding favourites to correct page -->
 <script>
     // detect when a checkbox is checked and submit the form
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
@@ -125,7 +127,27 @@
             document.getElementById('my_form').submit();
         });
     });
-    console.log("checking checking!");
+    console.log("checking");
+
+
+    function saveBookmark(title, url) {
+        $.ajax({
+            url: '/save-bookmark/',
+            type: 'POST',
+            data: {
+                'title': title,
+                'url': url,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function (data) {
+                // Handle success
+            },
+            error: function () {
+                // Handle error
+            }
+        });
+    }
+    console.log("bookmark check");
 </script>
 
 {% endblock %}
