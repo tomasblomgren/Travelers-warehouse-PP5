@@ -15,19 +15,14 @@ def favourites(request):
 
 def view_favourites(request):
     """ A view to render favourites """
+    selected_items = request.POST.getlist('selected_items')
     context = {
         'checkout': checkout,
         'favourites': favourites,
+        'selected_items': selected_items,
     }
 
     return render(request, 'favourites.html', context)
-
-
-def view_template_favourites(request):
-    """ a view to get the checked favourite product to the favourites """
-    selected_items = request.POST.getlist('selected_items')
-    context = {'selected_items': selected_items}
-    return render(request, 'view_template_favourites', context)
 
 
 def checkout(request):

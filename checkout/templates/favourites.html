@@ -15,19 +15,12 @@
 {% if favourites %}
 <ul>
     {% for favourite in favourites %}
-    <!-- Creates a form for checked favourite product -->
-    <form id="my_form" method="post" action="{% url 'view_template_favourites' %}">
-        {% csrf_token %}
-        <input type="checkbox" name="selected_items" value="item1"> Item 1<br>
-        <input type="checkbox" name="selected_items" value="item2"> Item 2<br>
-        <input type="checkbox" name="selected_items" value="item3"> Item 3<br>
-        <button type="submit">Submit</button>
-    </form>
+
     {% endfor %}
 </ul>
 
 {% endif %}
-{% endblock %}
+
 
 {% if selected_items %}
 <ul>
@@ -63,8 +56,8 @@
 
                     <!-- toggle function to be transfered into favourites -->
 
-                    <td><input type="checkbox" name="selected_items" class=" check-mb-5 fas fa-heart ml-5 mr-1"
-                            placeholder="Favourite here!">
+                    <td><input type="checkbox" name="selected_items" id="my_form"
+                            class=" check-mb-5 fas fa-heart ml-5 mr-1" placeholder="Favourite here!">
                     </td>
 
                     <!-- displays product rating and price -->
@@ -115,6 +108,15 @@
     </div>
 </div>
 
+<!-- Creates a form for checked favourite product -->
+<form id="my_form" method="post" action="">
+    {% csrf_token %}
+    <input type="checkbox" name="selected_items" value="item1"> Item 1<br>
+    <input type="checkbox" name="selected_items" value="item2"> Item 2<br>
+    <input type="checkbox" name="selected_items" value="item3"> Item 3<br>
+    <button type="submit">Submit</button>
+</form>
+
 <script>
     // detect when a checkbox is checked and submit the form
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
@@ -123,4 +125,7 @@
             document.getElementById('my_form').submit();
         });
     });
+    console.log("checking checking!");
 </script>
+
+{% endblock %}
