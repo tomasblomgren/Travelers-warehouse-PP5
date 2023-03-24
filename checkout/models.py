@@ -1,7 +1,6 @@
 import uuid
 
 from django.db import models
-from django.core.validators import EmailValidator, RegexValidator, MinLengthValidator, MaxLengthValidator
 from django.db.models import Sum
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -9,25 +8,8 @@ from django.contrib.auth.models import User
 from products.models import Product
 
 
-class Customer(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.CharField(max_length=100, validators=[EmailValidator()])
-    address = models.CharField(max_length=200)
-    city = models.CharField(max_length=100)
-    country = models.CharField(max_length=100)
-    zip_code = models.CharField(max_length=10, validators=[RegexValidator('^[0-9]{5}(?:-[0-9]{4})?$')])
-
-
-class Payment(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    card_number = models.CharField(max_length=20, validators=[RegexValidator('^[0-9]{13,19}$')])
-    expiry = models.CharField(max_length=5, validators=[RegexValidator('^(0[1-9]|1[0-2])\/([0-9]{2})$')])
-    cvv = models.CharField(max_length=4, validators=[RegexValidator('^[0-9]{3,4}$')])
-
-
 class Order(models.Model):
-    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    payment = models.ForeignKey(Payment, on_delete=models.CASCADE)
+
     order_number = models.CharField(max_length=32, null=False, editable=False)
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)

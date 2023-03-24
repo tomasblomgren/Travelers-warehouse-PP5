@@ -9,21 +9,17 @@
 {% endblock %}
 {% block content %}
 <div class="favorites-section">
-    <h2>Favorites</h2>
+    <h2 class="favourites-header">Favorites</h2>
     <ul id="favorites-list"></ul>
 </div>
 <!-- Creates a form for checked favourite product -->
-<form id="my_form" method="post" action="get">
-    {% csrf_token %}
-    <input type="checkbox" name="selected_items" value="item1"> Item 1<br>
-    <input type="checkbox" name="selected_items" value="item2"> Item 2<br>
-    <input type="checkbox" name="selected_items" value="item3"> Item 3<br>
-    <button type="submit">Submit</button>
-</form>
 {% if favourites %}
 <ul>
     {% for favourite in favourites %}
-
+    <form id="my_form" method="post" action="get">
+        {% csrf_token %}
+        <div id="my_form" class="selected_items"></div>
+    </form>
     {% endfor %}
 </ul>
 
@@ -33,11 +29,11 @@
 {% if selected_items %}
 <ul>
     {% for item in selected_items %}
-    <li>{{ item }}</li>
+    <li>{{ 'product.id' }}</li>
     {% endfor %}
 </ul>
 {% else %}
-<p>No items selected</p>
+<p class="favourites-header">No items selected</p>
 {% endif %}
 
 <div class="row">
@@ -120,6 +116,7 @@
 
 <!-- JS for adding favourites to correct page -->
 <script>
+    let FavouriteProducts = [];
     // detect when a checkbox is checked and submit the form
     const checkboxes = document.querySelectorAll('input[type=checkbox]');
     checkboxes.forEach((checkbox) => {
@@ -148,6 +145,17 @@
         });
     }
     console.log("bookmark check");
+
+    function senditem(product) {
+        // Add the product to the favouriteProducts array
+        FavouriteProducts.push(product);
+        console.log(`Product ${product} has been added to favourites!`);
+    }
+    // Print the favourite products array to the console
+    console.log(FavouriteProducts);
+    senditem('Selected ${product}')
+
+    console.log("senditemcheck")
 </script>
 
 {% endblock %}
