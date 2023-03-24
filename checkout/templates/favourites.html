@@ -12,29 +12,15 @@
     <h2 class="favourites-header">Favorites</h2>
     <ul id="favorites-list"></ul>
 </div>
-<!-- Creates a form for checked favourite product -->
-{% if favourites %}
-<ul>
-    {% for favourite in favourites %}
-    <form id="my_form" method="post" action="get">
-        {% csrf_token %}
-        <div id="my-element" class="selected_items"></div>
-    </form>
+<!-- Creates a paragraph for checked favourite product/checked items -->
+<div class="row">
+    {% for products in checked_items %}
+    <p class="checked_items">{{ product.name }}</p>
+    <!-- create a for loop for iterating through the checked/favourite products -->
+
     {% endfor %}
-</ul>
+</div>
 
-{% endif %}
-
-
-{% if selected_items %}
-<ul>
-    {% for item in selected_items %}
-    <li class="favouriteProducts">{{product.name}}</li>
-    {% endfor %}
-</ul>
-{% else %}
-<p class="favourites-header">No items selected</p>
-{% endif %}
 
 <div class="row">
     <div class="product-container col-10 offset-1">
@@ -60,9 +46,12 @@
 
                     <!-- toggle function to be transfered into favourites -->
 
-                    <td><input type="checkbox" name="selected_items" id="my_form"
-                            class=" check-mb-5 fas fa-heart ml-5 mr-1" placeholder="Favourite here!">
-                    </td>
+                    <div type="checkbox">
+                        <td><input type="checkbox" name="checkbox" id="my_form"
+                                class=" check-mb-5 fas fa-heart ml-5 mr-1" placeholder="Favourite here!">
+                            <span class="icon"></span>
+                        </td>
+                    </div>
 
                     <button id="add-to-fav-btn">Favourite this Product!</button>
                     <div id="fav-items"></div>

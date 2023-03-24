@@ -25,7 +25,7 @@ class Order(models.Model):
     grand_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=0)
 
     def _generate_order_number(self):
-        """ 
+        """
         generates random order number from uuid
         """
         return uuid.uuid4().hex.upper()
@@ -55,3 +55,15 @@ class Bookmark(models.Model):
     title = models.CharField(max_length=200)
     url = models.URLField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class CheckedItem(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    checked = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.name
+
+
+checked_items = CheckedItem.objects.filter(checked=True)
