@@ -18,7 +18,7 @@
     {% for favourite in favourites %}
     <form id="my_form" method="post" action="get">
         {% csrf_token %}
-        <div id="my_form" class="selected_items"></div>
+        <div id="my-element" class="selected_items"></div>
     </form>
     {% endfor %}
 </ul>
@@ -29,7 +29,7 @@
 {% if selected_items %}
 <ul>
     {% for item in selected_items %}
-    <li>{{ 'product.id' }}</li>
+    <li class="favouriteProducts">{{product.name}}</li>
     {% endfor %}
 </ul>
 {% else %}
@@ -114,16 +114,11 @@
     </div>
 </div>
 
-<!-- JS for adding favourites to correct page -->
+<!-- JS for adding favourites to correct the favourites page -->
 <script>
+    // list for favourite products to be injected to
     let FavouriteProducts = [];
-    // detect when a checkbox is checked and submit the form
-    const checkboxes = document.querySelectorAll('input[type=checkbox]');
-    checkboxes.forEach((checkbox) => {
-        checkbox.addEventListener('change', () => {
-            document.getElementById('my_form').submit();
-        });
-    });
+
     console.log("checking");
 
 
@@ -153,9 +148,9 @@
     }
     // Print the favourite products array to the console
     console.log(FavouriteProducts);
-    senditem('Selected ${product}')
+    senditem("product1shoes");
 
-    console.log("senditemcheck")
+    console.log("senditemcheck");
 </script>
 
 {% endblock %}
