@@ -43,6 +43,15 @@ class Order(models.Model):
         self.grand_total = self.order_total + self.delivery_cost
         self.save()
 
+    def save(self, *args, **kwargs):
+        """ override the order number in case on does not exist yet """
+        if not self.order_number:
+            self.order_number = self._generate_order_number(self)
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.order_number
+
 
 class OrderLineItem(models.Model):
     Order = models.ForeignKey(Order, null=False, blank=False, on_delete=models.CASCADE, related_name='lineitems')
@@ -50,14 +59,27 @@ class OrderLineItem(models.Model):
     quantity = models.IntegerField(null=False, blank=False, default=0)
     lineitem_total = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False, editable=False)
 
+    def save(self, *args, **kwargs):
+        """
+        Override the original save method to set the lineitem total
+        and update the order total.
+        """
+        self.lineitem_total = self.product.price * self.quantity
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f'SKU {self.product.sku} on order {self.order.order_number}'
+
 
 class Bookmark(models.Model):
+    """ the ability to bookmark a item/favourite """
     title = models.CharField(max_length=200)
     url = models.URLField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
 
 class CheckedItem(models.Model):
+    """ used for favourite items """
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
     checked = models.BooleanField(default=False)
