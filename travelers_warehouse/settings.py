@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'products',
     'bag',
     'checkout',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -60,6 +61,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'travelers_warehouse.urls'
+
+CRISPY_TEMPLATES_PACK = 'bootstrap4'
 
 TEMPLATES = [
     {
