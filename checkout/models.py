@@ -74,7 +74,7 @@ class OrderLineItem(models.Model):
 
 
 class Bookmark(models.Model):
-    """ the ability to bookmark a item/favourite """
+    """ the ability to bookmark an item/favourite """
     title = models.CharField(max_length=200)
     url = models.URLField()
     user = models.ForeignKey(User, on_delete=models.CASCADE)
