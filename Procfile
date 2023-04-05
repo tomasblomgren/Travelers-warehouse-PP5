@@ -1,0 +1,1 @@
+web: gunicorn travelers_warehouse.wsgi:application
