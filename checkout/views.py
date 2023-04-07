@@ -9,6 +9,11 @@ def view_bag(request):
     return render(request, 'checkout/templates/checkout.html')
 
 
+def view_orderform(request):
+""" A view to render the bag contents """
+return render(request, 'checkout/templates/checkout.html')
+
+
 def favourites(request):
     """ A view to render the bag contents """
 
