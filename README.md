@@ -56,7 +56,7 @@ Travelers warehouse is the one place you can get your outfit for the next vacati
 ## Credits
 
 ### Content
-- The setup for this website has been taken from the boutique ado website 
+- The code for this website has been taken from the boutique ado website  with changes done myself
 - The inspirational websites was H&M, Shopmango.com, Svensson.se i chose these because they are bright in colour, the UI is clean and the elements are separated so the user does not get crowded with information. 
 
 
