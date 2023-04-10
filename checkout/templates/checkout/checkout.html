@@ -20,9 +20,9 @@
             <hr>
         </div>
     </div>
-    <!-- checkout form -->
     <form action="{% url 'checkout' %}" method="POST" id="payment-form">
         {% csrf_token %}
+
         <div class="row">
             <div class="col-12 col-lg-6 order-lg-last mb-5"></div>
             <div class="col-12 col-lg-6">
@@ -67,10 +67,11 @@
                     <button>
                         <span class="font-weight-bold">Place Order</span>
                     </button>
-
                 </div>
-            </div>
-        </div>
+    </form>
+
+</div>
+</div>
 </div>
 {% for item in bag_items %}
 <div>
@@ -84,8 +85,8 @@
         </a>
     </div>
     <div class="col-3 text-right">
-        <!-- endtag for form -->
-        </form>
+
+
     </div>
 </div>
 {% endfor %}
