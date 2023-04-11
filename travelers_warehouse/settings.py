@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=f^o_mqzgce^nd35rjyai#*6hf+d8554gjq7lca0k2*mq_a6!!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['travelers-warehouse.herokuapp.com', 'localhost']
 
